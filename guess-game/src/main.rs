@@ -1,4 +1,4 @@
-use std::io;
+use std::{cmp::Ordering, io};
 use rand::Rng;
 
 fn main() {
@@ -13,7 +13,15 @@ fn main() {
 
     io::stdin().read_line(&mut user_input).expect("...enter a number!");
 
-    println!("Your input was: {user_input}");
+    let user_input: u32 = user_input.trim().parse().expect("...enter a number");
 
-    println!("...and the secrete number was: {secret_num}");
+    match secret_num.cmp(&user_input){
+        Ordering::Less => println!("Less than a number"),
+        Ordering::Greater => println!("Greater than a number"),
+        Ordering::Equal => println!("Hooray! Equal to a number!")
+    }
+
+    // println!("Your input was: {user_input}");
+
+    // println!("...and the secrete number was: {secret_num}");
 }
