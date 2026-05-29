@@ -19,12 +19,19 @@ fn main() {
             .read_line(&mut user_input)
             .expect("...enter a number");
     
-        let user_input: u32 = user_input.trim().parse().expect("...enter a number");
+        let user_input: u32 = match user_input.trim().parse(){
+            Ok(num) => num,
+            Err(_) => continue
+        };
 
         match user_input.cmp(&secret_num){
             Ordering::Less => println!("Less than a number"),
             Ordering::Greater => println!("Greater than a number"),
-            Ordering::Equal => println!("Hooray! Equal to a number!")
+            Ordering::Equal => {
+                println!("Hooray! Equal to a number!");
+                break;
+            } 
+                
         }
     }
 
