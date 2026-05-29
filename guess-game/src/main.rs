@@ -7,6 +7,8 @@ fn main() {
 
     let secret_num = rand::thread_rng().gen_range(0..=10);
 
+    let mut count: u32 = 0;
+
     println!("...secret number was generated. Try to guess it in arange between 0 and 10");
     
     loop {
@@ -24,6 +26,8 @@ fn main() {
             Err(_) => continue
         };
 
+        count = count + 1;
+        
         match user_input.cmp(&secret_num){
             Ordering::Less => println!("Less than a number"),
             Ordering::Greater => println!("Greater than a number"),
@@ -33,6 +37,9 @@ fn main() {
             } 
                 
         }
+
     }
+
+    println!("...it took {count} attempts to guess the secret number!");
 
 }
