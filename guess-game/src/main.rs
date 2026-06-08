@@ -27,7 +27,9 @@ fn main() {
         };
 
         count = count + 1;
+
         
+
         match user_input.cmp(&secret_num){
             Ordering::Less => println!("Less than a number"),
             Ordering::Greater => println!("Greater than a number"),
