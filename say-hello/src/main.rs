@@ -1,5 +1,7 @@
 use std::io;
 
+// Read a name from input and print a greeting.
+
 fn main(){
     println!("What is your name?");
 
