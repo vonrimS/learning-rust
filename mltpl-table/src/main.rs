@@ -3,7 +3,6 @@
 // Each line should look like this:
 // [number] x [i] = [result]
 
-use core::num;
 use std::io;
 
 fn main() {
