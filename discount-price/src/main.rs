@@ -10,13 +10,15 @@ use rust_decimal::{self, Decimal};
 fn main() {
     println!("Hello, welcome to our store!");
 
-    let price = read_price_input();
-    let discount = read_discount_input();
+    let price_valid_range: (Decimal, Decimal) = (Decimal::from(0), Decimal::MAX);
+    let discount_valid_range: (Decimal, Decimal) = (Decimal::from(0), Decimal::from(100));
+
+    let price = read_user_input("Enter original price:", price_valid_range);
+    let discount = read_user_input("Enter discount percentage:", discount_valid_range);
 
     let discount_break_down = price_discount(price, discount);
 
     print_out(&discount_break_down);
-
 }
 
 fn print_out(tup: &(Decimal, Decimal)){
@@ -26,49 +28,23 @@ fn print_out(tup: &(Decimal, Decimal)){
 }
 
 
-fn read_price_input() -> Decimal{
-    println!("Enter full price:");
+fn read_user_input(s: &str, range:(Decimal, Decimal)) -> Decimal{
+    println!("{s}");
     
     loop {
-        let mut price = String::new();
-        io::stdin().read_line(&mut price).expect("...cannot read your input");
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("...cannot read your input");
 
-        match price.trim().parse() {
+        match input.trim().parse() {
             Ok (num) => {
-                if num > Decimal::from(0) {
+                if num >= range.0 && num <= range.1 {
                     break num;
                 } else {
-                    println!("...price should be greater than null. Try again:")
+                    println!("...invalid value. Try again:")
                 }
             }
             Err(_) => {
                 println!("...invalid number. Try agan:");
-            }
-        }
-    }
-}
-
-
-fn read_discount_input() -> Decimal {
-    println!("Enter discount, in %:");
-    
-    loop{    
-        let mut discount = String::new();
-        io::stdin().read_line(&mut discount).expect("...cannot read your input");
-
-        let min_discount = Decimal::ZERO;
-        let max_discount = Decimal::from(100);
-
-        match discount.trim().parse() {
-            Ok(num) => {
-                if num >= min_discount && num <= max_discount {
-                    break num;
-                } else {
-                    println!("...discount must be between 0 and 100. Try again:");
-                }
-            }              
-            Err(_) => {
-                println!("...invalid number. Try again:");
             }
         }
     }
