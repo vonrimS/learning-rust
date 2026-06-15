@@ -57,3 +57,42 @@ fn price_discount(price: Decimal, discount: Decimal) -> (Decimal, Decimal){
     let tup = (minus_price, final_price);
     tup
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_normal_discount(){
+        let price = Decimal::from(100);
+        let discount = Decimal::from(10);
+
+        let (minus_price, final_price) = price_discount(price, discount);
+
+        assert_eq!(minus_price, Decimal::from(10));
+        assert_eq!(final_price, Decimal::from(90));
+    }
+
+    #[test]
+    fn test_zero_discount(){
+        let price = Decimal::from(100);
+        let discount = Decimal::from(0);
+
+        let (minus_price, final_price) = price_discount(price, discount);
+
+        assert_eq!(minus_price, Decimal::from(0));
+        assert_eq!(final_price, Decimal::from(100));
+    }
+
+    #[test]
+    fn test_hundred_discount(){
+        let price = Decimal::from(100);
+        let discount = Decimal::from(100);
+
+        let (minus_price, final_price) = price_discount(price, discount);
+
+        assert_eq!(minus_price, Decimal::from(100));
+        assert_eq!(final_price, Decimal::from(0));
+    }
+}
