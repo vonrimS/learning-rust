@@ -1,0 +1,13 @@
+error[E0308]: mismatched types
+ --> tests/fail/mix_currency.rs:5:16
+  |
+5 |     double_usd(eur); // Waiting error on this line
+  |     ---------- ^^^ expected `USD`, found `EUR`
+  |     |
+  |     arguments to this function are incorrect
+  |
+note: function defined here
+ --> src/lib.rs
+  |
+  | pub fn double_usd(amount: USD) -> USD {
+  |        ^^^^^^^^^^
