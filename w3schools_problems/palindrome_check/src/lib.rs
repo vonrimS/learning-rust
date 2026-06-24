@@ -20,23 +20,15 @@ pub fn read_input() -> String {
 }
 
 pub fn is_valid(w: &str) -> bool{
-    w.len() > 0 && w.chars().all(|c| c.is_ascii_alphabetic() || c.is_ascii_whitespace())
+    !w.is_empty() && w.chars().all(|c| c.is_ascii_alphabetic() || c.is_ascii_whitespace())
 }
 
 pub fn is_palindrome(w: &str) -> bool{
-    w == reverse_string(w)
+    w.chars().eq(w.chars().rev())
 }
 
-pub fn reverse_string(w: &str) -> String {
-    let mut res = String::new();
-    
-    let temp: Vec<char> = w.chars().collect();
-
-    for i in 0..w.len() {
-        res += &temp[w.len() - i - 1].to_string();
-    }
-
-    res
+pub fn reverse_string(w: &str) -> String{
+    w.chars().rev().collect()
 }
 
 
