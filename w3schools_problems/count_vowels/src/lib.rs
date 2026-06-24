@@ -8,14 +8,16 @@
 use std::io;
 
 pub fn read_input() -> String{
+    println!("Enter a string (ASCII letters only):");
     let mut input = String::new();
     loop{
         input.clear();
         io::stdin().read_line(&mut input).expect("...cannot read your input");
-        let trimmed = input.trim().to_lowercase();
 
-        if is_valid(&trimmed){
-            break trimmed.to_string();
+        let trimmed = input.trim();
+
+        if is_valid(trimmed){
+            break trimmed.to_lowercase();
         }
 
         println!("...invalid input! Try again:");
@@ -29,15 +31,11 @@ pub fn is_valid(s: &str) -> bool {
 
 
 pub fn count_vowels(s: &str) -> u32{
-    let mut count = 0;
     let vowels = ['a', 'e', 'i', 'o', 'u'];
     
-    for ch in s.chars(){
-        if vowels.contains(&ch) {
-            count += 1;
-        }
-    }
-    count
+    s.chars()
+        .filter(|c| vowels.contains(c))
+        .count() as u32
 }
 
 
