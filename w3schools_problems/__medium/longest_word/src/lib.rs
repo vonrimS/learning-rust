@@ -27,12 +27,12 @@ pub fn is_valid(s: &str) -> bool{
     !s.is_empty() && s.chars().all(|c| c.is_ascii_alphabetic() || c.is_ascii_whitespace())
 }
 
-pub fn find_longest_word(s: &str) -> String {
-    let mut longest = String::new();
+pub fn find_longest_word(s: &str) -> &str {
+    let mut longest = "";
 
-    for w in s.split(' ') {
+    for w in s.split_whitespace() {
         if w.len() > longest.len() {
-            longest = w.to_string()
+            longest = w
         }
     }
 
